@@ -51,6 +51,21 @@ public:
   virtual bool requestControllerData(vector6d_t& values) = 0;
 
   /*!
+   * \brief Set the system speed used when moving to writeControllerCommand
+   *        (multiply system speed by the unit vector of the ControllerCommand 
+   *         to get velocity)
+   *
+   * \param speed Desired speed
+   *              mm/second for translation (max of 20)
+   *              deg/second for rotation (max of 11.5)
+   *              Ex: speed=10 results in 10mm/s and 10 deg/sec
+   *                  speed=15 results in 15mm/s and 11.5 deg/sec
+   *
+   * \returns True on successful write.
+  */
+  virtual bool writeControllerSpeed(double speed) = 0;
+
+  /*!
    * \brief Writes a joint command together with a keepalive signal onto the socket being sent to
    * the robot.
    *
@@ -82,7 +97,7 @@ public:
   /*!
    * \brief Halts the hexapod.
    *
-   * \returns True if request successful.
+   * \returns True if request successfuwriteControllerSpeedl.
    */
   virtual bool haltHexapod() = 0;
 
@@ -195,6 +210,21 @@ public:
   bool requestControllerData(vector6d_t& values);
 
   /*!
+   * \brief Set the system speed used when moving to writeControllerCommand
+   *        (multiply system speed by the unit vector of the ControllerCommand 
+   *         to get velocity)
+   *
+   * \param speed Desired speed
+   *              mm/second for translation (max of 20)
+   *              deg/second for rotation (max of 11.5)
+   *              Ex: speed=10 results in 10mm/s and 10 deg/sec
+   *                  speed=15 results in 15mm/s and 11.5 deg/sec
+   *
+   * \returns True on successful write.
+  */
+  bool writeControllerSpeed(double speed);
+
+  /*!
    * \brief Writes a joint command together with a keepalive signal onto the socket being sent to
    * the robot.
    *
@@ -291,6 +321,24 @@ public:
     values = mock_values_;
     return true;
   };
+
+  /*!
+   * \brief Set the system speed used when moving to writeControllerCommand
+   *        (multiply system speed by the unit vector of the ControllerCommand 
+   *         to get velocity)
+   *
+   * \param speed Desired speed
+   *              mm/second for translation (max of 20)
+   *              deg/second for rotation (max of 11.5)
+   *              Ex: speed=10 results in 10mm/s and 10 deg/sec
+   *                  speed=15 results in 15mm/s and 11.5 deg/sec
+   *
+   * \returns True on successful write.
+  */
+  bool writeControllerSpeed(double speed)
+  {
+    return true;
+  }
 
   /*!
    * \brief Stores a joint command to use as position on next read.

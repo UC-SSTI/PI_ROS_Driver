@@ -38,6 +38,7 @@ HardwareInterface::HardwareInterface()
   , latest_error_id_(0)
 {
   joint_position_command_.fill(0.0);
+  joint_velocity_command_.fill(0.0);
   joint_positions_.fill(0.0);
   joint_velocities_.fill(0.0);
   joint_efforts_.fill(0.0);
@@ -49,6 +50,7 @@ HardwareInterface::HardwareInterface()
 
 bool HardwareInterface::init(ros::NodeHandle& root_nh, ros::NodeHandle& robot_hw_nh)
 {
+  ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
   if (!visual_joint_generator_.init(root_nh, robot_hw_nh))
   {
     ROS_ERROR_STREAM(
@@ -105,6 +107,14 @@ bool HardwareInterface::init(ros::NodeHandle& root_nh, ros::NodeHandle& robot_hw
 
   // Get joint names
   if (!root_nh.getParam("hardware_interface/joints", joint_names_))
+  {
+    ROS_ERROR_STREAM("Cannot find required parameter "
+                     << root_nh.resolveName("hardware_interface/joints")
+                     << " on the parameter server.");
+    return false;
+  }
+
+  if (!root_nh.getParam("hardware_interface/velocity_joints", velocity_joint_names_))
   {
     ROS_ERROR_STREAM("Cannot find required parameter "
                      << root_nh.resolveName("hardware_interface/joints")
@@ -182,7 +192,19 @@ bool HardwareInterface::init(ros::NodeHandle& root_nh, ros::NodeHandle& robot_hw
       joint_names_[i], &joint_positions_[i], &joint_velocities_[i], &joint_efforts_[i]));
 
     pj_interface_.registerHandle(hardware_interface::JointHandle(
-      js_interface_.getHandle(joint_names_[i]), &joint_position_command_[i]));
+       js_interface_.getHandle(joint_names_[i]), &joint_position_command_[i]));
+
+
+  }
+
+  for (std::size_t i = 0; i < velocity_joint_names_.size(); i++)
+  {
+    vjs_interface_.registerHandle(hardware_interface::JointStateHandle(
+      velocity_joint_names_[i], &vj_positions_[i], &vj_velocities_[i], &vj_efforts_[i]));
+
+
+    vj_interface_.registerHandle(hardware_interface::JointHandle(
+      vjs_interface_.getHandle(velocity_joint_names_[i]), &joint_velocity_command_[i]));
   }
 
   for (std::size_t i = 0; i < visual_joint_names_.size(); ++i)
@@ -197,6 +219,8 @@ bool HardwareInterface::init(ros::NodeHandle& root_nh, ros::NodeHandle& robot_hw
 
   registerInterface(&js_interface_);
   registerInterface(&pj_interface_);
+  registerInterface(&vjs_interface_);
+  registerInterface(&vj_interface_);
 
   // Open connection to hexapod
   if (!pi_driver_->connect())
@@ -353,8 +377,27 @@ void HardwareInterface::read(const ros::Time& time, const ros::Duration& period)
 
 void HardwareInterface::write(const ros::Time& time, const ros::Duration& period)
 {
+  ROS_INFO("Joint positions: %f, %f, %f, %f, %f, %f", 
+           joint_position_command_[0], 
+           joint_position_command_[1],
+           joint_position_command_[2],
+           joint_position_command_[3],
+           joint_position_command_[4],
+           joint_position_command_[5]);
+
+  ROS_INFO("Joint velocities: %f, %f, %f, %f, %f, %f",
+           joint_velocity_command_[0],
+           joint_velocity_command_[1],
+           joint_velocity_command_[2],
+           joint_velocity_command_[3],
+           joint_velocity_command_[4],
+           joint_velocity_command_[5]);
+
+  double speed_cmd = joint_velocity_command_[0];
+
   if (control_mode_enabled_)
   {
+    pi_driver_->writeControllerSpeed(speed_cmd);
     pi_driver_->writeControllerCommand(joint_position_command_);
     publishDriverStatus();
   }

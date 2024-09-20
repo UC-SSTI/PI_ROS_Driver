@@ -26,6 +26,7 @@
 #include <actionlib/server/simple_action_server.h>
 #include <hardware_interface/joint_command_interface.h>
 #include <hardware_interface/joint_state_interface.h>
+
 #include <hardware_interface/robot_hw.h>
 #include <pi_hexapod_control/visual_joint_generator.h>
 #include <pi_hexapod_msgs/ReferencingAction.h>
@@ -177,6 +178,9 @@ private:
   hardware_interface::JointStateInterface js_interface_;
   hardware_interface::PositionJointInterface pj_interface_;
 
+  hardware_interface::JointStateInterface vjs_interface_;
+  hardware_interface::VelocityJointInterface vj_interface_;
+
   std::vector<std::string> joint_names_;
   vector6d_t joint_position_command_;
   vector6d_t joint_positions_;
@@ -187,6 +191,13 @@ private:
   vector36d_t visual_joint_positions_;
   vector36d_t visual_joint_velocities_;
   vector36d_t visual_joint_efforts_;
+
+  std::vector<std::string> velocity_joint_names_;
+  vector6d_t joint_velocity_command_;
+
+  vector6d_t vj_positions_;
+  vector6d_t vj_velocities_;
+  vector6d_t vj_efforts_;
 
 
   volatile bool control_mode_enabled_;

@@ -18,7 +18,7 @@
   <arg name="baudrate"                  default="2400" />
 
   <!-- Controller Configuration -->
-  <arg name="controllers"               default="joint_state_controller joint_trajectory_controller" />
+  <arg name="controllers"               default="joint_state_controller joint_trajectory_controller hex_vel_controller" />
   <arg name="stopped_controllers"       default="joint_group_pos_controller cart_x_controller cart_y_controller cart_z_controller ang_u_controller ang_v_controller ang_w_controller" />
   <arg name="controller_config_file"    default="$(find pi_hexapod_control)/cfg/hexapod_controllers.yaml" />
   <rosparam file="$(arg controller_config_file)" command="load" />

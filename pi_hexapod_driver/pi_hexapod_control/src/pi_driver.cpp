@@ -162,6 +162,18 @@ bool HardwarePiDriver::requestControllerData(vector6d_t& values)
   return true;
 }
 
+bool HardwarePiDriver::writeControllerSpeed(double speed)
+{
+  if (PI_VLS(pi_id_, speed) == FALSE)
+  {
+    LOG_ERROR("Writing controller speed failed.");
+    updateError();
+    return false;
+  }
+
+  return true;
+}
+
 bool HardwarePiDriver::writeControllerCommand(const vector6d_t& values)
 {
   if (!isReferenced())
@@ -180,9 +192,7 @@ bool HardwarePiDriver::writeControllerCommand(const vector6d_t& values)
   values_in_mm_and_degree[4] = values[4] / M_PI * 180;
   values_in_mm_and_degree[5] = values[5] / M_PI * 180;
 
-  //LOG_INFO("X: %i, Y: %i, Z: %i", axis_[0], axis_[1], axis_[2]);
-  double speed = 20.0f; // mm/second (20 is max) & deg/sec (11.5 is max)
-  PI_VLS(pi_id_, speed);
+  // PI_MOV moves at the speed set with PI_VLS
   if (PI_MOV(pi_id_, axis_, values_in_mm_and_degree.data()) == FALSE)
   {
     LOG_ERROR("Writing Command to the Hexapod failed.");
