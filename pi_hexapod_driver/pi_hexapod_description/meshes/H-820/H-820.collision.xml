@@ -1,0 +1,109 @@
+<PI_Collision app="C:\Program Files (x86)\PI\PIVeriMove\PIVeriMove.exe">
+  <node caption="Hexapod Platform" id="1000">
+    <node caption="plate-segment" write-protect="1" id="1" primitivtype="1" colour="0.6 0.6 0.6" size="80.5 120 15" translate="-63 0 31.47" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="plate-segment" write-protect="1" id="2" primitivtype="1" colour="0.6 0.6 0.6" size="40 80 15" translate="-40 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-segment" write-protect="1" id="3" primitivtype="3" colour="0.6 0.6 0.6" size="20 15 15" translate="-40 -40 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-segment" write-protect="1" id="4" primitivtype="3" colour="0.6 0.6 0.6" size="20 15 15" translate="-40 40 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="plate-segment" write-protect="1" id="5" primitivtype="1" colour="0.6 0.6 0.6" size="80.5 120 15" translate="31.5 54.5596 31.47" rotate="0 0 -120" transparent="0" wireframe="0" dummy="0">
+      <node caption="plate-segment" write-protect="1" id="6" primitivtype="1" colour="0.6 0.6 0.6" size="40 80 15" translate="-40 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-segment" write-protect="1" id="7" primitivtype="3" colour="0.6 0.6 0.6" size="20 15 15" translate="-40 -40 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-segment" write-protect="1" id="8" primitivtype="3" colour="0.6 0.6 0.6" size="20 15 15" translate="-40 40 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="plate-segment" write-protect="1" id="9" primitivtype="1" colour="0.6 0.6 0.6" size="80.5 120 15" translate="31.5 -54.5596 31.47" rotate="0 0 120" transparent="0" wireframe="0" dummy="0">
+      <node caption="plate-segment" write-protect="1" id="10" primitivtype="1" colour="0.6 0.6 0.6" size="40 80 15" translate="-40 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-segment" write-protect="1" id="11" primitivtype="3" colour="0.6 0.6 0.6" size="20 15 15" translate="-40 -40 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-segment" write-protect="1" id="12" primitivtype="3" colour="0.6 0.6 0.6" size="20 15 15" translate="-40 40 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="plate-center" write-protect="1" id="13" primitivtype="3" colour="0.6 0.6 0.6" size="0.01 0.01 0" translate="0 0 31.47" rotate="0 0 0" transparent="1" wireframe="1" dummy="1">
+      <node caption="plate-element-0" write-protect="1" id="14" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="46.25 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-1" write-protect="1" id="15" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="43.460784 15.818432 0" rotate="0 0 20" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-2" write-protect="1" id="16" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="35.429555 29.728927 0" rotate="0 0 40" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-3" write-protect="1" id="17" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="23.125 40.053675 0" rotate="0 0 60" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-4" write-protect="1" id="18" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="8.031228 45.547359 0" rotate="0 0 80" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-5" write-protect="1" id="19" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-8.031228 45.547359 0" rotate="0 0 100" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-6" write-protect="1" id="20" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-23.125 40.053675 0" rotate="0 0 120" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-7" write-protect="1" id="21" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-35.429555 29.728927 0" rotate="0 0 140" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-8" write-protect="1" id="22" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-43.460784 15.818432 0" rotate="0 0 160" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-9" write-protect="1" id="23" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-46.25 0 0" rotate="0 0 180" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-10" write-protect="1" id="24" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-43.460784 -15.818432 0" rotate="0 0 200" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-11" write-protect="1" id="25" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-35.429555 -29.728927 0" rotate="0 0 220" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-12" write-protect="1" id="26" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-23.125 -40.053675 0" rotate="0 0 240" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-13" write-protect="1" id="27" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="-8.031228 -45.547359 0" rotate="0 0 260" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-14" write-protect="1" id="28" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="8.031228 -45.547359 0" rotate="0 0 280" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-15" write-protect="1" id="29" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="23.125 -40.053675 0" rotate="0 0 300" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-16" write-protect="1" id="30" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="35.429555 -29.728927 0" rotate="0 0 320" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="plate-element-17" write-protect="1" id="31" primitivtype="1" colour="0.6 0.6 0.6" size="47.5 24.685777 15" translate="43.460784 -15.818432 0" rotate="0 0 340" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+  </node>
+  <node caption="Enviroment" id="1001">
+    <node caption="base-center" write-protect="1" id="32" primitivtype="3" colour="0.6 0.6 0.6" size="0.01 0.01 0" translate="0 0 -258.364" rotate="0 0 0" transparent="1" wireframe="1" dummy="1">
+      <node caption="base-element-0" write-protect="1" id="33" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="107.5 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-1" write-protect="1" id="34" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="101.016957 36.767165 0" rotate="0 0 20" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-2" write-protect="1" id="35" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="82.349778 69.099668 0" rotate="0 0 40" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-3" write-protect="1" id="36" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="53.75 93.097731 0" rotate="0 0 60" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-4" write-protect="1" id="37" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="18.667179 105.866833 0" rotate="0 0 80" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-5" write-protect="1" id="38" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-18.667179 105.866833 0" rotate="0 0 100" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-6" write-protect="1" id="39" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-53.75 93.097731 0" rotate="0 0 120" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-7" write-protect="1" id="40" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-82.349778 69.099668 0" rotate="0 0 140" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-8" write-protect="1" id="41" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-101.016957 36.767165 0" rotate="0 0 160" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-9" write-protect="1" id="42" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-107.5 0 0" rotate="0 0 180" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-10" write-protect="1" id="43" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-101.016957 -36.767165 0" rotate="0 0 200" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-11" write-protect="1" id="44" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-82.349778 -69.099668 0" rotate="0 0 220" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-12" write-protect="1" id="45" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-53.75 -93.097731 0" rotate="0 0 240" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-13" write-protect="1" id="46" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="-18.667179 -105.866833 0" rotate="0 0 260" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-14" write-protect="1" id="47" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="18.667179 -105.866833 0" rotate="0 0 280" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-15" write-protect="1" id="48" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="53.75 -93.097731 0" rotate="0 0 300" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-16" write-protect="1" id="49" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="82.349778 -69.099668 0" rotate="0 0 320" transparent="0" wireframe="0" dummy="0"/>
+      <node caption="base-element-17" write-protect="1" id="50" primitivtype="1" colour="0.6 0.6 0.6" size="135 61.714443 20" translate="101.016957 -36.767165 0" rotate="0 0 340" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+  </node>
+  <node caption="Strut_1" id="1002">
+    <node caption="strutSegment" write-protect="1" id="51" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 -19 0" translate="0 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="52" primitivtype="3" colour="0.25098 0.501961 0.501961" size="37 148 0" translate="0 0 -97" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="strutSegment" write-protect="1" id="53" primitivtype="3" colour="0.25098 0.501961 0.501961" size="34 133 0" translate="0 0 80" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="54" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 14 0" translate="0 0 -73" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+  </node>
+  <node caption="Strut_2" id="1003">
+    <node caption="strutSegment" write-protect="1" id="55" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 -19 0" translate="0 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="56" primitivtype="3" colour="0.25098 0.501961 0.501961" size="37 148 0" translate="0 0 -97" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="strutSegment" write-protect="1" id="57" primitivtype="3" colour="0.25098 0.501961 0.501961" size="34 133 0" translate="0 0 80" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="58" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 14 0" translate="0 0 -73" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+  </node>
+  <node caption="Strut_3" id="1004">
+    <node caption="strutSegment" write-protect="1" id="59" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 -19 0" translate="0 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="60" primitivtype="3" colour="0.25098 0.501961 0.501961" size="37 148 0" translate="0 0 -97" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="strutSegment" write-protect="1" id="61" primitivtype="3" colour="0.25098 0.501961 0.501961" size="34 133 0" translate="0 0 80" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="62" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 14 0" translate="0 0 -73" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+  </node>
+  <node caption="Strut_4" id="1005">
+    <node caption="strutSegment" write-protect="1" id="63" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 -19 0" translate="0 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="64" primitivtype="3" colour="0.25098 0.501961 0.501961" size="37 148 0" translate="0 0 -97" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="strutSegment" write-protect="1" id="65" primitivtype="3" colour="0.25098 0.501961 0.501961" size="34 133 0" translate="0 0 80" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="66" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 14 0" translate="0 0 -73" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+  </node>
+  <node caption="Strut_5" id="1006">
+    <node caption="strutSegment" write-protect="1" id="67" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 -19 0" translate="0 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="68" primitivtype="3" colour="0.25098 0.501961 0.501961" size="37 148 0" translate="0 0 -97" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="strutSegment" write-protect="1" id="69" primitivtype="3" colour="0.25098 0.501961 0.501961" size="34 133 0" translate="0 0 80" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="70" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 14 0" translate="0 0 -73" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+  </node>
+  <node caption="Strut_6" id="1007">
+    <node caption="strutSegment" write-protect="1" id="71" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 -19 0" translate="0 0 0" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="72" primitivtype="3" colour="0.25098 0.501961 0.501961" size="37 148 0" translate="0 0 -97" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+    <node caption="strutSegment" write-protect="1" id="73" primitivtype="3" colour="0.25098 0.501961 0.501961" size="34 133 0" translate="0 0 80" rotate="0 0 0" transparent="0" wireframe="0" dummy="0">
+      <node caption="strutSegment" write-protect="1" id="74" primitivtype="3" colour="0.25098 0.501961 0.501961" size="19 14 0" translate="0 0 -73" rotate="0 0 0" transparent="0" wireframe="0" dummy="0"/>
+    </node>
+  </node>
+</PI_Collision>

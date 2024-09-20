@@ -136,13 +136,20 @@ bool HardwarePiDriver::connect()
 
 bool HardwarePiDriver::requestControllerData(vector6d_t& values)
 {
-  // request current position
+  //request current position
   if (PI_qPOS(pi_id_, axis_, joint_pos_) == FALSE)
   {
     LOG_ERROR("Requesting Data from the Hexapod failed.");
     updateError();
     return false;
   }
+
+  // if (PI_qVLS(pi_id_, joint_pos_) == FALSE)
+  // {
+  //   LOG_ERROR("PI_qVLS failed");
+  //   updateError();
+  //   return false;
+  // }
 
   // transform values from millimeter to meter
   values[0] = joint_pos_[0] / 1000;
@@ -173,14 +180,16 @@ bool HardwarePiDriver::writeControllerCommand(const vector6d_t& values)
   values_in_mm_and_degree[4] = values[4] / M_PI * 180;
   values_in_mm_and_degree[5] = values[5] / M_PI * 180;
 
-  // command move to absolute position
+  //LOG_INFO("X: %i, Y: %i, Z: %i", axis_[0], axis_[1], axis_[2]);
+  double speed = 20.0f; // mm/second (20 is max) & deg/sec (11.5 is max)
+  PI_VLS(pi_id_, speed);
   if (PI_MOV(pi_id_, axis_, values_in_mm_and_degree.data()) == FALSE)
   {
     LOG_ERROR("Writing Command to the Hexapod failed.");
     updateError();
     return false;
   }
-
+  
   if (!error_checking_)
   {
     updateError();
@@ -218,6 +227,15 @@ bool HardwarePiDriver::updateReferencedStatus()
   is_referenced_ = (referenced == TRUE);
   LOG_INFO_STREAM("Hexapod-Reference request successful. Status: " << std::boolalpha
                                                                    << is_referenced_);
+  /*
+  std::array<int, 6> vel_control = {TRUE, TRUE, TRUE, TRUE, TRUE, TRUE};
+  if (PI_VCO(pi_id_, axis_, vel_control.data()) == FALSE)
+  {
+    LOG_ERROR("PI_VCO Failed");
+    updateError();
+  }
+  */
+
 
   return true;
 }

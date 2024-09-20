@@ -247,7 +247,11 @@ private:
   int pi_id_;
   uint32_t communication_timeout_ms_;
 
+  std::array<int, 6> vel_control_ = {1, 1, 1, 1, 1, 1};
+
   const char axis_[12] = "X Y Z U V W";
+
+  char vel_axis[12] = "X Y Z U V W";
   double joint_pos_[6] = {0, 0, 0, 0, 0, 0};
 };
 

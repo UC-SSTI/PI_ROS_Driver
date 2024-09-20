@@ -1,0 +1,5 @@
+<map id="pi_hexapod_control::PiDriver" name="pi_hexapod_control::PiDriver">
+<area shape="rect" id="node1" title="An abstract class representing a Hexapod Driver." alt="" coords="92,5,241,47"/>
+<area shape="rect" id="node2" href="$classpi__hexapod__control_1_1HardwarePiDriver.html" title="This is the main class for interfacing the driver." alt="" coords="5,95,155,136"/>
+<area shape="rect" id="node3" href="$classpi__hexapod__control_1_1SimulatedPiDriver.html" title="Driver with simulated Hexapod hardware." alt="" coords="179,95,328,136"/>
+</map>

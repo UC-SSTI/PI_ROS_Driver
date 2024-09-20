@@ -63,6 +63,9 @@ joint_group_pos_controller:
 joint_trajectory_controller:
   type: position_controllers/JointTrajectoryController
   joints: *robot_joints
+  constraints:
+    goal_time: 5
+  #   stopped_velocity_tolerance: 0.002
 
 cart_x_controller:
    type: position_controllers/JointPositionController

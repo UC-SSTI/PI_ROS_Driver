@@ -1,0 +1,9 @@
+<map id="include/pi_hexapod_control/pi_errors.h" name="include/pi_hexapod_control/pi_errors.h">
+<area shape="rect" id="node1" title=" " alt="" coords="332,5,480,47"/>
+<area shape="rect" id="node2" href="$pi__driver_8h.html" title=" " alt="" coords="220,95,368,136"/>
+<area shape="rect" id="node6" href="$pi__driver_8cpp.html" title=" " alt="" coords="341,191,471,218"/>
+<area shape="rect" id="node7" href="$pi__errors_8cpp.html" title=" " alt="" coords="444,102,573,129"/>
+<area shape="rect" id="node3" href="$hardware__interface_8h.html" title=" " alt="" coords="101,184,317,225"/>
+<area shape="rect" id="node4" href="$hardware__interface_8cpp.html" title=" " alt="" coords="5,281,204,307"/>
+<area shape="rect" id="node5" href="$hardware__interface__node_8cpp.html" title=" " alt="" coords="229,273,399,315"/>
+</map>

@@ -7,7 +7,7 @@
 base_height:    # line 13 (convert mm in m)
   0.088326097
 vel_max_xyz:
-  0.005
+  0.02
 vel_max_uvw:
   0.625
 effort_limit:

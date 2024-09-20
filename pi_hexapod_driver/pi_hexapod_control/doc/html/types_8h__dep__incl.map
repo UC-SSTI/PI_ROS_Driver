@@ -1,0 +1,10 @@
+<map id="include/pi_hexapod_control/types.h" name="include/pi_hexapod_control/types.h">
+<area shape="rect" id="node1" title=" " alt="" coords="192,5,340,47"/>
+<area shape="rect" id="node2" href="$pi__driver_8h.html" title=" " alt="" coords="105,102,253,143"/>
+<area shape="rect" id="node7" href="$visual__joint__generator_8h.html" title=" " alt="" coords="277,95,431,151"/>
+<area shape="rect" id="node3" href="$hardware__interface_8h.html" title=" " alt="" coords="159,199,375,240"/>
+<area shape="rect" id="node6" href="$pi__driver_8cpp.html" title=" " alt="" coords="5,206,135,233"/>
+<area shape="rect" id="node4" href="$hardware__interface_8cpp.html" title=" " alt="" coords="64,295,263,322"/>
+<area shape="rect" id="node5" href="$hardware__interface__node_8cpp.html" title=" " alt="" coords="287,288,458,329"/>
+<area shape="rect" id="node8" href="$visual__joint__generator_8cpp.html" title=" " alt="" coords="400,206,617,233"/>
+</map>
