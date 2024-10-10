@@ -162,14 +162,36 @@ bool HardwarePiDriver::requestControllerData(vector6d_t& values)
   return true;
 }
 
-bool HardwarePiDriver::writeControllerSpeed(double speed)
+bool HardwarePiDriver::setVelocityMode(void)
 {
-  if (PI_VLS(pi_id_, speed) == FALSE)
+  // SPA accepts (ItemID, PamID, PamValue)
+  // Set Trajectory Source to 1.
+  // 1 = Motion path determined by consecutive MOV commands
+  const unsigned int trajectory_source = 0x19001900;
+  const double value = 1;
+  // TODO: PI_SPA accepts szStrings argument, but I have no idea what to put there.
+  //PI_SPA(pi_id_, axis_, &trajectory_source, &value);
+
+  // Set Trajectory Execution to 1.
+  // 1 = Motion Profile is stored in a buffer before execution
+  const unsigned int motion_profile = 0x19001901;
+  //PI_SPA(pi_id_, axis_, &motion_profile, &value);
+
+  return true;
+}
+
+bool HardwarePiDriver::writeControllerSpeed(uint32_t cycle_time)
+{
+  // Set to max system speed to ensure commanded speed isn't limited
+  const double max_system_speed = 20;
+  if (PI_VLS(pi_id_, max_system_speed) == FALSE)
   {
     LOG_ERROR("Writing controller speed failed.");
     updateError();
     return false;
   }
+
+  PI_SCT(pi_id_, cycle_time);
 
   return true;
 }

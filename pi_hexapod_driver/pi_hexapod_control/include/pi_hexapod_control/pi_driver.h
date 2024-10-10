@@ -63,7 +63,9 @@ public:
    *
    * \returns True on successful write.
   */
-  virtual bool writeControllerSpeed(double speed) = 0;
+  virtual bool writeControllerSpeed(uint32_t speed) = 0;
+
+  virtual bool setVelocityMode(void) = 0;
 
   /*!
    * \brief Writes a joint command together with a keepalive signal onto the socket being sent to
@@ -222,7 +224,9 @@ public:
    *
    * \returns True on successful write.
   */
-  bool writeControllerSpeed(double speed);
+  bool writeControllerSpeed(uint32_t speed);
+
+  bool setVelocityMode(void);
 
   /*!
    * \brief Writes a joint command together with a keepalive signal onto the socket being sent to
@@ -335,7 +339,12 @@ public:
    *
    * \returns True on successful write.
   */
-  bool writeControllerSpeed(double speed)
+  bool writeControllerSpeed(uint32_t speed)
+  {
+    return true;
+  }
+
+  bool setVelocityMode(void)
   {
     return true;
   }

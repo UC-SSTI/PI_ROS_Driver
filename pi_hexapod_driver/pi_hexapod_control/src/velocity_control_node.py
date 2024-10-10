@@ -2,103 +2,66 @@
 import rospy
 
 from std_msgs.msg import Float64MultiArray
+from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 import numpy as np
 import math
+import time
+import warnings
 
 class HexTrajectoryControl(object):
     def __init__(self):
         rospy.init_node("hex_trajectory_control")
 
-        self.vel_pub = rospy.Publisher(
-                        '/hex_vel_controller/command', 
-                        Float64MultiArray,
-                        queue_size=10)
+        self.qdot_pub = rospy.Publisher(
+                        '/pi_hardware_interface/qdot_cmd',
+                        JointTrajectory,
+                        queue_size=10
+        )
 
-        self.pos_pub = rospy.Publisher(
-                        '/joint_group_pos_controller/command',
-                        Float64MultiArray,
-                        queue_size=10)
+        # Each qdot trajectory point will execute for this time (in ms).
 
-    def publish(self, position: list, velocity: list):
-        # TODO: Currently the first element in the velocity list
-        # is set directly as the hexapod system velocity.
-        pos_msg = Float64MultiArray()
-        pos_msg.data = position
-        
-        vel_msg = Float64MultiArray()
-        vel_msg.data = velocity
+    def publish(self, trajectory: list, qdot_period:float=50):
+        """
+        Commands hexapod to execute trajectory.
 
-        self.pos_pub.publish(pos_msg)
-        self.vel_pub.publish(vel_msg)
+        PARAMS:
+          trajectory - A list of list where the inner list defines the 
+                       velocity for each axis (X, Y, Z, U, V, W).
+                       Velocity is in mm/s for translation and mrad/s for rotation.
 
+                       The outer list defines a point on the trajectory.
+                       Each point is executed after the qdot_period.
 
-    def calculate_magnitude(self, v):
-        return np.sqrt(v[0]**2 + v[1]**2 + v[2]**2)
+          qdot_period - The amount of time (in ms) to execute each point.
+                        The hexapod will move at the commanded rate for this long.
+        """
+        trajectory_msg = JointTrajectory()
 
-    def calculate_direction(self, v):
-        magnitude = self.calculate_magnitude(v)
-        direction = [
-            v[0] / magnitude,
-            v[1] / magnitude,
-            v[2] / magnitude
-        ]
-        return direction
-
-    def is_vectors_equal(self, v1, v2):
-        if len(v1) != len(v2):
-            return False
-
-        for i in range(len(v1)):
-            # Use isclose since we're comparing floats
-            if not math.isclose(v1[i], v2[i]):
-                return False
-
-        return True
-
-
-    def execute_trajectory(self, trajectory):
         for point in trajectory:
-            # Calculate average speed
-            # Note this doesn't account for angular speed.
-            lin_speed = self.calculate_magnitude(point['vel'][:3])
-            
+            trajectory_point = JointTrajectoryPoint()
+            trajectory_point.velocities = point
+            print(point)
+            for element in point:
+                if abs(element) > 20:
+                    print(f"WARNING: Velocity command ({element}) is > max (20 mm/s).")
+            trajectory_msg.points.append(trajectory_point)
 
-            # Check velocity is in the same direction as position
-            lin_pos_dir = self.calculate_direction(point['pos'][:3])
-            lin_vel_dir = self.calculate_direction(point['vel'][:3])
-            ang_pos_dir = self.calculate_direction(point['pos'][3:])
-            ang_vel_dir = self.calculate_direction(point['vel'][3:])
+        trajectory_msg.points[0].effort.append(qdot_period)
 
-            if not self.is_vectors_equal(lin_pos_dir, lin_vel_dir):
-                raise Exception("Linear Position and Velocity Directions Differ")
+        self.qdot_pub.publish(trajectory_msg)
 
-            if not self.is_vectors_equal(ang_pos_dir, ang_vel_dir):
-                raise Exception("Angular Position and Velocity Directions Differ")
-
-            # Calculate time to reach point
-            # Does not account for acceleration (make delta_v between points small)
-            distance = self.calculate_magnitude(point['pos'])
-            #time_for_point = 
 
     def run(self):
         trajectory = [
-            {"pos": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-             "vel": [20.0, 10.0, 10.0, 10.0, 10.0, 10.0]},
-
-            {"pos": [0.0, 0.016, -0.0065, -0.174535, 0.0, 0.0],
-             "vel": [20.0, 10.0, 10.0, 10.0, 10.0, 10.0]},
-
-            {"pos": [0.0, 0.0, 0.0065, 0.0, 0.0, 0.0],
-             "vel": [20.0, 10.0, 10.0, 10.0, 10.0, 10.0]},
-
-            {"pos": [0.0, 0.0, -0.0065, 0.174535, 0.0, 0.0],
-             "vel": [20.0, 10.0, 10.0, 10.0, 10.0, 10.0]},
+           [0.0, 0.0, -50, 0.0, 0.0, 0.0] for i in range(1)
         ]
 
+        #while not rospy.is_shutdown():
+        for i in range(2):
+            self.publish(trajectory, 500)
+            rospy.sleep(1)
 
-        for point in trajectory:
-            self.publish(point["pos"], point["vel"])
-            rospy.sleep(3)
+        
 
 if __name__ == "__main__":
     node = HexTrajectoryControl()

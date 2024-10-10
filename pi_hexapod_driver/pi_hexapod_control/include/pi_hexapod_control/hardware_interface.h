@@ -37,6 +37,7 @@
 #include <std_msgs/String.h>
 #include <std_srvs/SetBool.h>
 #include <std_srvs/Trigger.h>
+#include <trajectory_msgs/JointTrajectory.h>
 
 #include "pi_hexapod_control/pi_driver.h"
 
@@ -149,6 +150,8 @@ public:
    */
   bool stopServiceCallback(std_srvs::TriggerRequest& req, std_srvs::TriggerResponse& res);
 
+  void qdotCallback(const trajectory_msgs::JointTrajectoryConstPtr& trajectory);
+
 protected:
   /*!
    * \brief Callback to reference Hexapod via ROS Action
@@ -174,6 +177,8 @@ private:
 
   ros::Publisher pub_error_id_;
   ros::Publisher pub_error_msg_;
+
+  ros::Subscriber qdot_sub;
 
   hardware_interface::JointStateInterface js_interface_;
   hardware_interface::PositionJointInterface pj_interface_;
