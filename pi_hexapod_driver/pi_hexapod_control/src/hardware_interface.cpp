@@ -264,7 +264,7 @@ bool HardwareInterface::init(ros::NodeHandle& root_nh, ros::NodeHandle& robot_hw
     robot_hw_nh.advertiseService("stop_hexapod", &HardwareInterface::stopServiceCallback, this);
 
   // Setup Velocity Command Subscriber
-  qdot_sub = robot_hw_nh.subscribe("qdot_cmd", 10, &HardwareInterface::qdotCallback, this);
+  qdot_sub = robot_hw_nh.subscribe("qdot_cmd", 1, &HardwareInterface::qdotCallback, this);
 
   ROS_INFO("Loaded pi_hexapod_control hardware_interface");
   return true;
@@ -383,76 +383,80 @@ void HardwareInterface::read(const ros::Time& time, const ros::Duration& period)
 
 void HardwareInterface::qdotCallback(const trajectory_msgs::JointTrajectoryConstPtr& trajectory)
 {
-  const uint16_t num_points = trajectory->points.size();
   const uint16_t num_joints = 6U;
 
-  std::vector<vector6d_t> point_cmds;
-
-  double qdot_cycle_time = 50; // ms
 
   if (trajectory->points[0].effort.size() > 0)
   {
-    qdot_cycle_time = trajectory->points[0].effort[0];
+    qdot_cycle_time_ = trajectory->points[0].effort[0];
   }
 
-  for (int point = 0; point < num_points; point++)
+  if (trajectory->points[0].effort.size() > 1)
   {
-    vector6d_t command;
-    for (int joint = 0; joint < num_joints; joint++)
+    if (trajectory->points[0].effort[1])
     {
-      double velocity = trajectory->points[point].velocities[joint];
-      // Calculate the distance per point for this axis to reach 
-      // commanded velocity with the cycle time
+      ROS_INFO("Zeroing");
+      vector6d_t position_command;
+      for (int joint = 0; joint < num_joints; joint++)
+      {
+        qdot_command_[joint] = 0.0f;
+        position_command[joint] = 0.0f;
+      }
 
-      // Convert m/s to mm/ms
-      velocity = velocity * 0.001 * 0.001;
-      // Calculate distance (meters = m/ms * ms)
-      double dist = velocity * qdot_cycle_time; 
-      
-      // Add point for this joint at a distance from the current position that achieves
-      // velocity in cycle time.
-      command[joint] = joint_positions_[joint] + dist;
+        ROS_INFO("Zeroing....");
+        pi_driver_->writeControllerSpeed(10);
+        pi_driver_->writeControllerCommand(position_command);
     }
-    point_cmds.push_back(command);
   }
 
-  pi_driver_->writeControllerSpeed(qdot_cycle_time);
-
-  for (int point = 0; point < num_points; point++)
+  vector6d_t command;
+  for (int joint = 0; joint < num_joints; joint++)
   {
-    pi_driver_->writeControllerCommand(point_cmds[point]);
+    double velocity = trajectory->points[0].velocities[joint];
+
+    // Convert m/s to mm/ms
+    velocity = velocity * 0.001 * 0.001;
+
+    qdot_command_[joint] = velocity;
   }
+
+  
 }
 
 void HardwareInterface::write(const ros::Time& time, const ros::Duration& period)
 {
-  // ROS_INFO("Joint positions: %f, %f, %f, %f, %f, %f", 
-  //          joint_position_command_[0], 
-  //          joint_position_command_[1],
-  //          joint_position_command_[2],
-  //          joint_position_command_[3],
-  //          joint_position_command_[4],
-  //          joint_position_command_[5]);
+  const uint16_t num_joints = 6U;
 
-  double speed_cmd = 20.0; // joint_velocity_command_[0];
+  ROS_INFO("Writing...");
 
-  const int num_points = 5;
-  vector6d_t jpc[num_points];
-
-  for (int i = 0; i < num_points; i++)
+  vector6d_t position_command;
+  for (int joint = 0; joint < num_joints; joint++)
   {
-    jpc[i].fill(0.0);
-    jpc[i][2] = 0.01 * i;
+    // Calculate the distance per point for this axis to reach 
+    // commanded velocity with the cycle time
+
+    // Calculate distance (meters = m/ms * ms)
+    double dist = qdot_command_[joint] * qdot_cycle_time_;
+    //ROS_INFO("Vel (mm/ms): %f, Cycle time (ms): %f, Dist (mm): %f", qdot_command_[joint], qdot_cycle_time_, dist);
+      
+    
+    // Add point for this joint at a distance from the current position that achieves
+    // velocity in cycle time.
+    position_command[joint] = joint_positions_[joint] + dist;
   }
+
+  pi_driver_->writeControllerSpeed(qdot_cycle_time_);
+
+  ROS_INFO("Pos write");
+
+  pi_driver_->writeControllerCommand(position_command);
+
+
+
+  ROS_INFO("Writing driver status");
 
   if (control_mode_enabled_)
   {
-    // pi_driver_->writeControllerSpeed(speed_cmd);
-
-    for (int i = 0; i < num_points; i++)
-    {
-      //pi_driver_->writeControllerCommand(jpc[i]);
-    }
     publishDriverStatus();
   }
 }

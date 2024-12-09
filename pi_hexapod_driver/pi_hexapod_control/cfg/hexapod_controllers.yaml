@@ -4,7 +4,7 @@
 # with this package.
 
 hardware_interface:
-   controller_rate: &controller_rate 100
+   controller_rate: &controller_rate 25
    # actuated 6D-Pose of Hexapod platform
    joints: &robot_joints
      - cart_x

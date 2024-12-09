@@ -100,9 +100,13 @@ int main(int argc, char** argv)
     const ros::Time time       = ros::Time::now();
     const ros::Duration period = time - prev_time;
 
+    ROS_INFO("Read");
     g_hw_interface->read(time, period);
+    ROS_INFO("update");
     cm.update(time, period);
+    ROS_INFO("write");
     g_hw_interface->write(time, period);
+    ROS_INFO("sleep");
 
     prev_time = time;
     rate.sleep();

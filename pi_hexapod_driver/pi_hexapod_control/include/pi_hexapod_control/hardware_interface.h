@@ -204,6 +204,10 @@ private:
   vector6d_t vj_velocities_;
   vector6d_t vj_efforts_;
 
+  // In mm/ms
+  vector6d_t qdot_command_;
+  double qdot_cycle_time_ = 50; // ms
+
 
   volatile bool control_mode_enabled_;
   volatile bool position_controller_running_;
