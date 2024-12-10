@@ -28,22 +28,39 @@ def compute_velocity(d, angular_velocity):
     v_y = -omega_x * d
     v_z = 0
 
-    return [v_x, v_y, v_z, omega_x, omega_y, omega_z]
+    result = np.array([v_x, v_y, v_z, omega_x, omega_y, omega_z])
+    return result
 
+# 99.12 mm
 i = [0]*6
-vel = np.array([0.00001, 0.0001, 0.00005, 0.00025, 0.0001, 0.0005])
-period = [3.2, 2.5, 2.75, 1, 2, 3]
+#vel = np.array([0.00001, 0.0001, 0.00005, 0.001, 0.0001, 0.0005])
+
+cube_vel = np.array([0.0, 0.0, 0.0, 0.0003, 0.0001, 0.0001])
+period = [3.2, 2.5, 2.75, 10, 8, 3]
 rate = 0.5
+
+# Indicates whether the axis has reached the stop position
+centered = [True] * 6
 
 while not rospy.is_shutdown():
     
-    for v in range(len(vel)):
+    for v in range(len(cube_vel)):
     
-        if i[v]*rate > period[v]:
-            vel[v] = vel[v] * -1
-            i[v] = 0
+        if centered[v]:
+            # Ensures it goes the full range whether than one direction and back to center
+            if i[v]*rate > period[v]/2:
+                cube_vel[v] = cube_vel[v] * -1
+                i[v] = 0
+                centered[v] = False
+        else:
+            if i[v]*rate > period[v]:
+                cube_vel[v] = cube_vel[v] * -1
+                i[v] = 0
 
+    vel = compute_velocity(-0.09912, cube_vel[3:])
     print(vel)
+
+
 
     msg.data = cmd = [vel[0], vel[1], vel[2], vel[3], vel[4], vel[5], 10000.0]
 
