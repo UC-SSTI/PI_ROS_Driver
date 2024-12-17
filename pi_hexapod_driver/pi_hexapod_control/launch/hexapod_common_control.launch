@@ -12,6 +12,7 @@
        using_tcp_ip_connection and using_rs232_connection are mutually exclusive -->
   <arg name="using_tcp_ip_connection"   default="true" doc="Use IP/Port to connect to Hexapod Controller" />
   <arg name="hexapod_ip"                default="192.168.20.3" />
+  <!-- <arg name="hexapod_ip"                default="192.168.20.10" /> -->
   <arg name="hexapod_port"              default="50000" />
   <arg name="using_rs232_connection"    default="false" doc="Use Serial Connection to connect to Hexapod Controller" />
   <arg name="rs232_port_nr"             default="1" />

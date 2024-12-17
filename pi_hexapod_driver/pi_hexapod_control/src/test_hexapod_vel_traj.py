@@ -4,6 +4,7 @@ import rospy
 from std_msgs.msg import Float64MultiArray
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 rospy.init_node("hex_commands")
 
 pub = rospy.Publisher('/target_vel_hex', Float64MultiArray, queue_size=1)
@@ -35,12 +36,14 @@ def compute_velocity(d, angular_velocity):
 i = [0]*6
 #vel = np.array([0.00001, 0.0001, 0.00005, 0.001, 0.0001, 0.0005])
 
-cube_vel = np.array([0.0, 0.0, 0.0, 0.0003, 0.0001, 0.0001])
+cube_vel = np.array([0.0, 0.0, 0.0, 0.0003, 0.0001, 0.0002])
 period = [3.2, 2.5, 2.75, 10, 8, 3]
 rate = 0.5
 
 # Indicates whether the axis has reached the stop position
 centered = [True] * 6
+
+velocities = []
 
 while not rospy.is_shutdown():
     
@@ -57,10 +60,11 @@ while not rospy.is_shutdown():
                 cube_vel[v] = cube_vel[v] * -1
                 i[v] = 0
 
+
     vel = compute_velocity(-0.09912, cube_vel[3:])
     print(vel)
 
-
+    velocities.append(vel)
 
     msg.data = cmd = [vel[0], vel[1], vel[2], vel[3], vel[4], vel[5], 10000.0]
 
@@ -68,3 +72,36 @@ while not rospy.is_shutdown():
         i[ii] += 1
     pub.publish(msg)
     rospy.sleep(rate)
+
+
+time = np.linspace(0, rate*len(velocities), len(velocities))
+
+plt.plot(time, 1000 * np.array(velocities)[:,3], label="X Axis Angular Velocity")
+plt.plot(time, 1000 * np.array(velocities)[:,4], label="Y Axis Angular Velocity")
+plt.plot(time, 1000 * np.array(velocities)[:,5], label="Z Axis Angular Velocity")
+
+
+plt.xlabel("Time (s)")
+plt.ylabel("Angular Velocity (deg/s)")
+plt.title("Satellite Angular Velocity Over Time")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.clf()
+
+position_x = 1000 * np.cumsum(np.array(velocities)[:,3]) * rate
+position_y = 1000 * np.cumsum(np.array(velocities)[:,4]) * rate
+position_z = 1000 * np.cumsum(np.array(velocities)[:,5]) * rate
+
+
+plt.plot(time, position_x, label="X Axis Rotation")
+plt.plot(time, position_y, label="Y Axis Rotation")
+plt.plot(time, position_z, label="Z Axis Rotation")
+
+plt.xlabel("Time (s)")
+plt.ylabel("Angle (deg)")
+plt.title("Satellite Attitude Over Time")
+plt.legend()
+plt.grid(True)
+plt.show()
