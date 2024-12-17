@@ -36,8 +36,8 @@ def compute_velocity(d, angular_velocity):
 i = [0]*6
 #vel = np.array([0.00001, 0.0001, 0.00005, 0.001, 0.0001, 0.0005])
 
-cube_vel = np.array([0.0, 0.0, 0.0, 0.0003, 0.0001, 0.0002])
-period = [3.2, 2.5, 2.75, 10, 8, 3]
+cube_vel = np.array([0.0, 0.0, 0.0, 0.00015, 0.00005, 0.0001])
+period = [3.2, 2.5, 2.75, 20, 16, 6]
 rate = 0.5
 
 # Indicates whether the axis has reached the stop position
